@@ -1,2 +1,3 @@
-# design-system
-Design system criado durante o evento Ignite Lab
+# Design System
+
+Design system criado durante o evento Ignite Lab.
