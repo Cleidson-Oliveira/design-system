@@ -13,9 +13,15 @@ export default {
         size: {
             options: ["sm", "md", "lg"],
             control: {
-                type: "inline-radio"
+                type: "select"
             }
-        }
+        },
+        as: {
+            options: ["p", "span", "h1", "h2", "h3", "h4", "h5", "h6"],
+            control: {
+                type: "select"
+            }
+        },
     }
 } as Meta<TextProps>
 
