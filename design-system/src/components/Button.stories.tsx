@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Button, IButtonProps } from "./Button";
+import { UserPlus } from "phosphor-react";
 
 export default {
     title: 'Components/Button',
@@ -14,6 +15,11 @@ export default {
             control: {
                 type: "inline-radio"
             }
+        },
+        fn: {
+            table: {
+                disable: true
+            }
         }
     }
 } as Meta<IButtonProps>
@@ -25,4 +31,19 @@ export const SecondaryButton: StoryObj<IButtonProps> = {
         children: "Secondary Button",
         buttonType: "secondary",
     },
+};
+
+export const JustIconButton: StoryObj<IButtonProps> = {
+    args: {
+        children: (<UserPlus className="w-5 h-5" />),
+        buttonType: "secondary",
+        justIcon: true,
+    },
+    argTypes: {
+        children: {
+            table: {
+                disable: true
+            }
+        }
+    }
 };
