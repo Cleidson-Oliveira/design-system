@@ -5,6 +5,7 @@ type TAs = "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 
 export interface TextProps {
     children: ReactNode,
+    className?: string,
     size?: "sm" | "md" | "lg",
     as?: TAs,
 }
@@ -15,59 +16,56 @@ interface TextConteinerTypeProps {
     as?: TAs,
 }
 
-function TextConteinerType ({as = "span", elClass, children, ...props }: TextConteinerTypeProps) {
+function TextConteinerType ({as = "span", elClass, children }: TextConteinerTypeProps) {
     let el: JSX.Element;
 
     switch (as) {
         case "p":
-            el = (<p className={elClass} {...props}>{children}</p>)
+            el = (<p className={elClass}>{children}</p>)
             break;
         case "h1":
-            el = (<h1 className={elClass} {...props}>{children}</h1>)
+            el = (<h1 className={elClass}>{children}</h1>)
             break;
         case "h2":
-            el = (<h2 className={elClass} {...props}>{children}</h2>)
+            el = (<h2 className={elClass}>{children}</h2>)
             break;
         case "h3":
-            el = (<h3 className={elClass} {...props}>{children}</h3>)
+            el = (<h3 className={elClass}>{children}</h3>)
             break;
         case "h4":
-            el = (<h4 className={elClass} {...props}>{children}</h4>)
+            el = (<h4 className={elClass}>{children}</h4>)
             break;
         case "h5":
-            el = (<h5 className={elClass} {...props}>{children}</h5>)
+            el = (<h5 className={elClass}>{children}</h5>)
             break;
         case "h6":
-            el = (<h6 className={elClass} {...props}>{children}</h6>)
+            el = (<h6 className={elClass}>{children}</h6>)
             break;    
         case "span":
         default:
-            el = (<span className={elClass} {...props}>{ children }</span>)
+            el = (<span className={elClass}>{ children }</span>)
             break;
     }
 
     return el;
 }
 
-export function Text ({ as="span", size = "sm", children }: TextProps) {
-    let cls: IDinamicClass;
-
-    if (as == "span" || as == "p") {
-        cls = {
-            "text-xs": size == "sm",
-            "text-sm": size == "md",
-            "text-md": size == "lg"
-        }
-    } else {
-        cls = {
-            "text-lg": size == "sm",
-            "text-xl": size == "md",
-            "text-2xl": size == "lg"
-        }
+export function Text ({ as="span", size="sm", className: internalClass, children }: TextProps) {
+    const isSpanOrP = as == "span" || as == "p"
+    const staticClass = internalClass ? internalClass : "text-gold-50 text-sans";
+    
+    const dinamicClass: IDinamicClass = (isSpanOrP) ? {
+        "text-xs": size == "sm",
+        "text-sm": size == "md",
+        "text-md": size == "lg"
+    } : {
+        "font-bold text-lg": size == "sm",
+        "font-bold text-xl": size == "md",
+        "font-bold text-2xl": size == "lg"
     }
 
     return (
-        <TextConteinerType as={as} elClass={clsx('text-gray-100 text-sans', cls)}>
+        <TextConteinerType as={as} elClass={clsx(staticClass, dinamicClass)}>
             { children }
         </TextConteinerType>
     )
