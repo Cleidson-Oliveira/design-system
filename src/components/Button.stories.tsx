@@ -6,7 +6,7 @@ export default {
     title: 'Components/Button',
     component: Button,
     args: {
-        children: "Primary Button",
+        children: "Primary test",
         buttonType: "primary",
     },
     argTypes: {
